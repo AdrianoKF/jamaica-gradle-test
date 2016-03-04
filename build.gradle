@@ -21,7 +21,7 @@ compileTestJava {
 
 test {
   // Use host's own Jamaica VM to launch tests
-  executable = '/usr/local/jamaica/bin/jamaicavm'
+  executable = project.property('jamaicaPath')
 }
 
 dependencies {
