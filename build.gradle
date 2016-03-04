@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+compileJava {
+  // Compile Java sources using jamaicac, see gradle.properties
+  options.fork = true
+  options.forkOptions.executable = project.property('javacPath')
+}
+
+compileTestJava {
+  // Compile test sources using jamaicac, see gradle.properties
+  options.fork = true
+  options.forkOptions.executable = project.property('javacPath')
+}
+
+test {
+  // Use host's own Jamaica VM to launch tests
+  executable = '/usr/local/jamaica/bin/jamaicavm'
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
