@@ -1,10 +1,21 @@
 # jamaica-gradle-test
-Minimal reproducible example demonstrating classloading problems when running JUnit tests with JamaicaVM
+Minimal reproducible example demonstrating classloading problems when running JUnit tests from Gradle with JamaicaVM.
 
-Steps to reproduce (on Linux x86-64):
+Tool versions
+---
+* JamaicaVM 6.4-beta3 (build 9129), Host: Linux x86-64, Target: PikeOS
+* Gradle 2.11
+* JUnit 4.12
+
+Steps to reproduce (on Linux x86-64)
+---
 
 * Clone repository
 * Execute build and run unit tests: ```./gradlew clean test```
+
+
+Problem description
+---
 
 The unit test execution task fails with an exception (apparently related to classloading):
 
@@ -37,5 +48,7 @@ The possible origin of this exception is
 [Gradle's main worker](https://github.com/gradle/gradle/blob/master/subprojects/core/src/main/groovy/org/gradle/process/internal/launcher/GradleWorkerMain.java),
 responsible for launching the unit test task from within the main Gradle JVM instance.
 
-Notes: The build script assumes that the JamaicaVM compiler and VM binaries reside in the ```/usr/local/jamaica/bin``` directory.
+Notes
+---
+The build script assumes that the JamaicaVM compiler and VM binaries reside in the ```/usr/local/jamaica/bin``` directory.
 If your local installation uses a different installation path, you change the directory names in the ```gradle.properties``` file.
